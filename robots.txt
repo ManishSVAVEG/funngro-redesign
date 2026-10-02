@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manishsvaveg.github.io/funngro-redesign/sitemap.xml
