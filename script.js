@@ -1,19 +1,16 @@
-/* =========================================================
-   Funngro — professional interactions
-   Loaded with `defer`. Respects prefers-reduced-motion.
-   ========================================================= */
+/* Funngro — interactions, 3D tilt, mobile touch. Loaded with defer. */
 
 (function () {
   'use strict';
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-  /* ---------- 1. Mobile nav toggle ---------- */
+  /* Mobile nav toggle */
   const header = document.getElementById('site-header');
   const navToggle = header ? header.querySelector('.nav-toggle') : null;
   const nav = document.getElementById('site-nav');
-
   if (header && navToggle && nav) {
     navToggle.addEventListener('click', () => {
       const open = header.classList.toggle('nav-open');
@@ -27,213 +24,180 @@
     });
   }
 
-  /* ---------- 2. Scroll progress bar ---------- */
-  const progress = document.createElement('div');
-  progress.className = 'scroll-progress';
-  progress.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(progress);
-
-  let rafProgress = false;
-  function updateProgress() {
-    const h = document.documentElement;
-    const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
-    progress.style.width = (scrolled * 100).toFixed(2) + '%';
-    rafProgress = false;
-  }
-  window.addEventListener('scroll', () => {
-    if (rafProgress) return;
-    rafProgress = true;
-    requestAnimationFrame(updateProgress);
-  }, { passive: true });
-
-  /* ---------- 3. Scroll reveal with stagger ---------- */
-  // Assign --i index per group so stagger uses CSS only
-  document.querySelectorAll('[data-stagger], [data-reveal-group]').forEach((group) => {
-    Array.from(group.children).forEach((child, i) => {
-      child.style.setProperty('--i', String(i));
-      child.classList.add('reveal');
-    });
-  });
-  document.querySelectorAll('.steps > .step, .work > .work-item, .stories > .story, .screens > .screen, .cat-grid > li').forEach((el, i) => {
-    el.style.setProperty('--i', String(i % 6));
-  });
-
-  const revealEls = document.querySelectorAll('.reveal, [data-reveal-group], [data-stagger], .mask-line');
-
+  /* Reveal */
+  const revealEls = document.querySelectorAll('.reveal, [data-reveal-group], .mask-line');
   if ('IntersectionObserver' in window && !prefersReduced) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-
-          if (el.classList.contains('mask-line')) {
-            el.classList.add('in');
-          } else if (el.matches('[data-reveal-group], [data-stagger]')) {
-            Array.from(el.children).forEach((child) => {
-              child.classList.add('in');
-              const card = child.querySelector('.acard');
-              if (card) card.classList.add('in');
-            });
-          } else {
-            el.classList.add('in');
-            // reveal any cards inside grid
-            el.querySelectorAll?.('.acard').forEach((c) => c.classList.add('in'));
-          }
-          io.unobserve(el);
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
-    );
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.matches('[data-reveal-group]')) {
+          Array.from(el.children).forEach((child, i) => {
+            child.style.setProperty('--i', String(i));
+            child.classList.add('reveal');
+            requestAnimationFrame(() => child.classList.add('in'));
+          });
+        }
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach((el) => io.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add('in'));
-    document.querySelectorAll('.acard').forEach((el) => el.classList.add('in'));
+    document.querySelectorAll('[data-reveal-group] > *').forEach((el) => el.classList.add('in'));
   }
 
-  /* ---------- 4. Count-up for stats ---------- */
-  const counters = document.querySelectorAll('[data-count]');
-  if (counters.length && 'IntersectionObserver' in window && !prefersReduced) {
-    const countIO = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          animateCount(entry.target);
-          countIO.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.6 }
-    );
-    counters.forEach((el) => countIO.observe(el));
-  } else {
-    counters.forEach((el) => {
-      const end = parseFloat(el.dataset.count);
-      const suffix = el.dataset.suffix || '';
-      el.textContent = formatNum(end) + suffix;
+  const heroEl = document.querySelector('.hero');
+  if (heroEl) requestAnimationFrame(() => setTimeout(() => heroEl.classList.add('in'), 60));
+
+  /* ---------- Phone 3D tilt (desktop) ---------- */
+  const phone = document.getElementById('hero-phone');
+  const stage = document.getElementById('phone-stage');
+  if (phone && stage && !prefersReduced && canHover) {
+    let raf = false, tx = 0, ty = 0, cx = 0, cy = 0;
+    function loop() {
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      phone.style.setProperty('--tx', (-cy * 3).toFixed(2) + 'deg');
+      phone.style.setProperty('--ty', ( cx * 4).toFixed(2) + 'deg');
+      if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(loop);
+      else raf = false;
+    }
+    function schedule() { if (!raf) raf = requestAnimationFrame(loop); }
+    stage.addEventListener('mousemove', (e) => {
+      const r = stage.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+      schedule();
+    });
+    stage.addEventListener('mouseleave', () => { tx = 0; ty = 0; schedule(); });
+  }
+
+  /* ---------- Card 3D tilt (desktop hover) ---------- */
+  if (canHover && !prefersReduced) {
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      let raf = false, tx = 0, ty = 0, cx = 0, cy = 0;
+      function loop() {
+        cx += (tx - cx) * 0.18;
+        cy += (ty - cy) * 0.18;
+        card.style.setProperty('--rx', (-cy * 3.5).toFixed(2) + 'deg');
+        card.style.setProperty('--ry', ( cx * 3.5).toFixed(2) + 'deg');
+        if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) raf = requestAnimationFrame(loop);
+        else raf = false;
+      }
+      function schedule() { if (!raf) raf = requestAnimationFrame(loop); }
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+        ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+        schedule();
+      });
+      card.addEventListener('mouseleave', () => { tx = 0; ty = 0; schedule(); });
     });
   }
 
-  function animateCount(el) {
-    const end = parseFloat(el.dataset.count);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1600;
-    const start = performance.now();
-    function tick(now) {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 4); // easeOutQuart
-      el.textContent = formatNum(end * eased) + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = formatNum(end) + suffix;
-    }
-    requestAnimationFrame(tick);
-  }
-  function formatNum(n) {
-    if (n >= 1000) return Math.round(n).toLocaleString('en-IN');
-    if (Number.isInteger(n)) return String(n);
-    return n.toFixed(0);
+  /* ---------- Mobile: tap-to-tilt on cards ---------- */
+  if (isTouch && !prefersReduced) {
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      card.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        const r = card.getBoundingClientRect();
+        const tx = ((t.clientX - r.left) / r.width) * 2 - 1;
+        const ty = ((t.clientY - r.top) / r.height) * 2 - 1;
+        card.style.transition = 'transform .25s cubic-bezier(.16,1,.3,1)';
+        card.style.transform = `perspective(900px) rotateX(${(-ty * 3).toFixed(2)}deg) rotateY(${(tx * 3).toFixed(2)}deg) translateY(-3px)`;
+      }, { passive: true });
+
+      card.addEventListener('touchend', () => {
+        card.style.transform = '';
+      }, { passive: true });
+      card.addEventListener('touchcancel', () => {
+        card.style.transform = '';
+      }, { passive: true });
+    });
   }
 
-  /* ---------- 5. Arcade category tabs (click + scroll-spy) ---------- */
-  const catnav = document.getElementById('catnav');
-  if (catnav) {
-    catnav.addEventListener('click', (e) => {
-      const btn = e.target.closest('.catbtn');
-      if (!btn) return;
-      catnav.querySelectorAll('.catbtn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      const target = document.getElementById('cat-' + btn.dataset.cat);
-      if (target) {
-        const offset = 72;
-        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
+  /* ---------- Arcade nav: mobile drag-to-scroll ---------- */
+  const arcadeNav = document.querySelector('.arcade-nav');
+  if (arcadeNav && isTouch) {
+    let isDown = false, startX = 0, startScroll = 0, moved = false;
+
+    arcadeNav.addEventListener('pointerdown', (e) => {
+      // Only drag with touch/pen — let mouse users use native scroll
+      if (e.pointerType === 'mouse') return;
+      isDown = true;
+      moved = false;
+      startX = e.clientX;
+      startScroll = arcadeNav.scrollLeft;
+      arcadeNav.classList.add('is-dragging');
+    });
+
+    arcadeNav.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      arcadeNav.scrollLeft = startScroll - dx;
+    });
+
+    function endDrag() {
+      isDown = false;
+      arcadeNav.classList.remove('is-dragging');
+      // If user was scrolling, prevent the tap-click
+      if (moved) {
+        // brief guard so a link doesn't fire
+        arcadeNav.style.pointerEvents = 'none';
+        setTimeout(() => { arcadeNav.style.pointerEvents = ''; }, 0);
+      }
+    }
+    arcadeNav.addEventListener('pointerup', endDrag);
+    arcadeNav.addEventListener('pointercancel', endDrag);
+    arcadeNav.addEventListener('pointerleave', endDrag);
+  }
+
+  /* ---------- FAQ: close others when one opens ---------- */
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (item.open) {
+        faqItems.forEach((other) => { if (other !== item && other.open) other.open = false; });
       }
     });
+  });
+    /* ---------- Arcade: sync tabs + E L P tiles with scroll ---------- */
+  const arcadeTabs = document.querySelectorAll('.arcade-tab');
+  const arcadeElps = document.querySelectorAll('.arcade-elp-tile');
+  const arcadeSections = document.querySelectorAll('#earn, #learn, #play');
 
-    if ('IntersectionObserver' in window) {
-      const sections = document.querySelectorAll('[id^="cat-"]');
-      const spyIO = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const id = entry.target.id.replace('cat-', '');
-              catnav.querySelectorAll('.catbtn').forEach((b) => {
-                b.classList.toggle('active', b.dataset.cat === id);
-              });
-            }
-          });
-        },
-        { rootMargin: '-30% 0px -60% 0px' }
-      );
-      sections.forEach((s) => spyIO.observe(s));
-    }
+  function setArcadeActive(id) {
+    arcadeTabs.forEach((t) => t.classList.toggle('is-active', t.dataset.tab === id));
+    arcadeElps.forEach((el) => el.classList.toggle('is-active', el.dataset.tab === id));
   }
 
-  /* ---------- 6. Hero parallax + cursor spotlight ---------- */
-  const hero = document.querySelector('.hero');
-  if (hero && !prefersReduced) {
-    const glows = hero.querySelectorAll('.hero-glow');
-    const spotlight = document.createElement('div');
-    spotlight.className = 'hero-spotlight';
-    spotlight.setAttribute('aria-hidden', 'true');
-    hero.prepend(spotlight);
-
-    let raf = false;
-    function updateParallax() {
-      const y = window.pageYOffset;
-      glows.forEach((g, i) => {
-        const factor = i === 0 ? 0.1 : -0.06;
-        g.style.transform = 'translate3d(0,' + (y * factor) + 'px,0)';
+  if (arcadeSections.length && 'IntersectionObserver' in window) {
+    const arcadeIO = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          if (id === 'earn' || id === 'learn' || id === 'play') setArcadeActive(id);
+        }
       });
-      raf = false;
-    }
-    window.addEventListener('scroll', () => {
-      if (raf) return;
-      raf = true;
-      requestAnimationFrame(updateParallax);
-    }, { passive: true });
-
-    if (isDesktop) {
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        const cx = ((e.clientX - rect.left) / rect.width) * 100;
-        const cy = ((e.clientY - rect.top) / rect.height) * 100;
-        spotlight.style.setProperty('--cx', cx + '%');
-        spotlight.style.setProperty('--cy', cy + '%');
-      });
-    }
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+    arcadeSections.forEach((s) => arcadeIO.observe(s));
   }
 
-  /* ---------- 7. Magnetic buttons (subtle pull toward cursor) ---------- */
-  if (isDesktop && !prefersReduced) {
-    document.querySelectorAll('.btn-primary, .btn-secondary').forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const r = btn.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width) * 100;
-        const y = ((e.clientY - r.top) / r.height) * 100;
-        btn.style.setProperty('--mx', x + '%');
-        btn.style.setProperty('--my', y + '%');
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.setProperty('--mx', '50%');
-        btn.style.setProperty('--my', '50%');
-      });
+  // Smooth scroll for arcade tabs + tiles (respect reduced motion)
+  [...arcadeTabs, ...arcadeElps].forEach((el) => {
+    el.addEventListener('click', (e) => {
+      const id = el.dataset.tab;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      setArcadeActive(id);
+      const offset = 72;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
     });
-
-    // Category buttons share the same spotlight trick
-    document.querySelectorAll('.catbtn').forEach((btn) => {
-      btn.addEventListener('mousemove', (e) => {
-        const r = btn.getBoundingClientRect();
-        btn.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
-        btn.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
-      });
-    });
-  }
-
-  /* ---------- 8. Hero mask-line reveal on load ---------- */
-  const heroEl = document.querySelector('.hero');
-  if (heroEl) {
-    requestAnimationFrame(() => {
-      setTimeout(() => heroEl.classList.add('in'), 80);
-    });
-  }
+  });
 })();
