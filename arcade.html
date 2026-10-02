@@ -5,258 +5,263 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#060A08" />
 
-<title>Funngro Arcade — twenty apps across earn, learn, puzzle &amp; play</title>
-<meta name="description" content="Funngro Arcade is the wider Funngro shelf: twenty apps across four categories — Earn, Learn, Puzzle &amp; Brain and Play &amp; Classics." />
-<link rel="canonical" href="https://REPLACE-ME.vercel.app/arcade.html" />
+<title>Funngro Arcade | Explore, Learn &amp; Play</title>
+<meta name="description" content="Explore the Funngro Arcade and discover its activities and experiences in one place." />
+<link rel="canonical" href="https://manishsvaveg.github.io/funngro-redesign/arcade.html" />
 
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Funngro Arcade — twenty apps across four categories" />
-<meta property="og:description" content="Some pay, some teach, some are for passing five minutes between classes." />
+<meta property="og:title" content="Funngro Arcade | Explore, Learn &amp; Play" />
+<meta property="og:description" content="Explore the Funngro Arcade and discover its activities and experiences in one place." />
+<meta property="og:url" content="https://manishsvaveg.github.io/funngro-redesign/arcade.html" />
 <meta property="og:image" content="./og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Funngro Arcade — twenty apps across four categories" />
-<meta name="twitter:description" content="Earn, Learn, Puzzle &amp; Brain, Play &amp; Classics — the wider Funngro shelf." />
+<meta name="twitter:title" content="Funngro Arcade | Explore, Learn &amp; Play" />
+<meta name="twitter:description" content="Explore the Funngro Arcade and discover its activities and experiences in one place." />
 
+<link rel="icon" href="./favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css">
+
+<script type="application/ld+json">
+{ "@context": "https://schema.org", "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://manishsvaveg.github.io/funngro-redesign/" },
+    { "@type": "ListItem", "position": 2, "name": "Arcade", "item": "https://manishsvaveg.github.io/funngro-redesign/arcade.html" }
+  ]
+}
+</script>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="header" id="site-header">
   <div class="header-inner">
     <a href="./index.html" class="brand" aria-label="Funngro home">
       <span class="brand-mark" aria-hidden="true">✌</span><span>Funngro</span>
     </a>
-
     <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
       <span></span>
     </button>
-
     <nav class="nav" id="site-nav" aria-label="Primary">
-      <a href="./index.html">Earn</a>
-      <a href="./index.html#stories">Stories</a>
-      <a href="./index.html#brands">For Brands</a>
+      <a href="./index.html">Home</a>
+      <a href="./index.html#how">How it works</a>
+      <a href="./index.html#work">Opportunities</a>
+      <a href="./index.html#app">App</a>
+      <a href="./index.html#faq">FAQ</a>
       <a href="./arcade.html" class="active">Arcade</a>
     </nav>
-
     <div class="header-actions">
-      <button class="lang" type="button" aria-label="Language: English">EN</button>
+      <span class="lang-indicator" aria-label="Language: English">EN</span>
       <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">Download <span class="arrow down" aria-hidden="true">↓</span></a>
     </div>
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
 <!-- ARCADE HERO -->
 <section class="arcade-hero">
+  <div class="arcade-depth" aria-hidden="true"></div>
   <div class="container">
     <nav class="crumbs reveal" aria-label="Breadcrumb">
       <a href="./index.html">Home</a>
       <span aria-hidden="true">→</span>
       <span aria-current="page">Arcade</span>
     </nav>
-    <div class="reveal">
-      <div class="section-label">The Funngro Arcade</div>
-      <h1 class="arcade-title">Twenty apps. <em>Four ways to use them.</em></h1>
-      <p class="arcade-lede">The wider Funngro shelf. Some pay. Some teach. Some are just for passing five minutes between classes.</p>
+
+    <div class="arcade-hero-grid">
+      <div class="reveal reveal--left">
+        <div class="section-label">The Funngro Arcade</div>
+        <h1 class="arcade-title">Explore the Arcade.</h1>
+        <p class="arcade-lede">A separate space inside Funngro for the activities and experiences beyond paid work.</p>
+        <div class="arcade-hero-ctas">
+          <a class="btn btn-primary" href="#earn">Browse categories <span class="arrow" aria-hidden="true">↓</span></a>
+          <a class="btn btn-secondary" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">Open in app</a>
+        </div>
+      </div>
+
+      <!-- Interactive phone mockup with tabs + E L P tiles -->
+      <div class="arcade-hero-visual reveal reveal--right">
+        <div class="arcade-phone-stage">
+          <div class="arcade-phone-shadow" aria-hidden="true"></div>
+
+          <div class="arcade-phone" role="img" aria-label="Illustrative Arcade preview">
+            <div class="arcade-screen">
+
+              <div class="arcade-top">
+                <span class="arcade-app-title">Arcade</span>
+                <span class="arcade-app-pill">Explore</span>
+              </div>
+
+              <!-- Tabs (also clickable) -->
+              <nav class="arcade-tabs" aria-label="Arcade sections">
+                <a class="arcade-tab is-active" href="#earn" data-tab="earn"><b>01</b> Earn</a>
+                <a class="arcade-tab" href="#learn" data-tab="learn"><b>02</b> Learn</a>
+                <a class="arcade-tab" href="#play" data-tab="play"><b>03</b> Play</a>
+              </nav>
+
+              <!-- E / L / P tiles (clickable) -->
+              <div class="arcade-content">
+                <a class="arcade-elp-tile arcade-elp-tile--e" href="#earn" data-tab="earn" aria-label="Go to Earn section">E</a>
+                <a class="arcade-elp-tile arcade-elp-tile--l" href="#learn" data-tab="learn" aria-label="Go to Learn section">L</a>
+                <a class="arcade-elp-tile arcade-elp-tile--p" href="#play" data-tab="play" aria-label="Go to Play section">P</a>
+              </div>
+
+              <div class="arcade-nav-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <p class="arcade-phone-caption">Tap a letter to jump to that section</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- TWO MAIN APPS -->
-<section class="section section--flush">
+<!-- FEATURED -->
+<section class="section section--flush" id="browse">
   <div class="container">
     <div class="reveal">
-      <div class="section-label">The two main apps</div>
-      <h2 class="h2">Start here. <em class="accent-i">The rest are extras.</em></h2>
+      <div class="section-label">Featured</div>
+      <h2 class="h2">Start with the main reason people open the app.</h2>
     </div>
-    <div class="twoapps reveal">
-      <a class="twoapp" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">
-        <span class="twoapp-tile" aria-hidden="true">F</span>
-        <div>
-          <div class="twoapp-head"><h3 class="twoapp-name">Funngro</h3><span class="twoapp-tag">Primary</span></div>
-          <p class="twoapp-desc">The main earning app. Brand campaigns, instant UPI/bank payouts, the Income Ladder.</p>
-          <span class="twoapp-cta">Play Store <span class="arrow" aria-hidden="true">↗</span></span>
-        </div>
-      </a>
-      <a class="twoapp" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">
-        <span class="twoapp-tile" aria-hidden="true">S</span>
-        <div>
-          <div class="twoapp-head"><h3 class="twoapp-name">Funngro SheLancer</h3><span class="twoapp-tag">Primary</span></div>
-          <p class="twoapp-desc">Women-only vertical. Verified, safe, women-only campaigns and Clans.</p>
-          <span class="twoapp-cta">Play Store <span class="arrow" aria-hidden="true">↗</span></span>
-        </div>
-      </a>
+    <div class="featured-card reveal">
+      <div class="featured-card__visual" aria-hidden="true">
+        <span class="featured-badge">01 · Earn</span>
+        <span class="featured-tile">E</span>
+      </div>
+      <div class="featured-card__body">
+        <h3 class="featured-card__title">Explore opportunities</h3>
+        <p class="featured-card__text">Work connected to skills and paid tasks. The core of what Funngro is for — finding work from brands and businesses, and getting paid for what you deliver.</p>
+        <ul class="featured-list">
+          <li>Content and promotion campaigns</li>
+          <li>Referrals and short surveys</li>
+          <li>Smaller tasks that match your skills</li>
+        </ul>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">Open in app <span class="arrow" aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CATEGORY NAV -->
+<!-- EARN -->
+<section class="section arcade-cat" id="earn">
+  <div class="container">
+    <div class="arcade-cat-head reveal">
+      <div>
+        <div class="section-label"><span class="num">01</span> Earn</div>
+        <h2 class="h2">Work that pays.</h2>
+      </div>
+      <p class="arcade-cat-desc">Opportunities connected to brands and campaigns. What's available changes over time.</p>
+    </div>
+    <ul class="arcade-grid" data-reveal-group>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">R</span>
+        <h3 class="arcade-tile-card__title">Content</h3>
+        <p class="arcade-tile-card__body">Short-form content for campaigns and brands.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">B</span>
+        <h3 class="arcade-tile-card__title">Promotion</h3>
+        <p class="arcade-tile-card__body">Help brands reach new audiences.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">F</span>
+        <h3 class="arcade-tile-card__title">Referrals</h3>
+        <p class="arcade-tile-card__body">Share relevant products with your network.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">M</span>
+        <h3 class="arcade-tile-card__title">Micro tasks</h3>
+        <p class="arcade-tile-card__body">Smaller tasks that fit your available time.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- LEARN -->
+<section class="section arcade-cat" id="learn">
+  <div class="container">
+    <div class="arcade-cat-head reveal">
+      <div>
+        <div class="section-label"><span class="num">02</span> Learn</div>
+        <h2 class="h2">Build useful skills.</h2>
+      </div>
+      <p class="arcade-cat-desc">Simple activities designed to help you practise something new.</p>
+    </div>
+    <ul class="arcade-grid" data-reveal-group>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">C</span>
+        <h3 class="arcade-tile-card__title">Communication</h3>
+        <p class="arcade-tile-card__body">Practise writing and presenting ideas clearly.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">D</span>
+        <h3 class="arcade-tile-card__title">Digital basics</h3>
+        <p class="arcade-tile-card__body">Everyday skills for working online.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">F</span>
+        <h3 class="arcade-tile-card__title">Financial literacy</h3>
+        <p class="arcade-tile-card__body">Bite-sized ideas around money and planning.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PLAY -->
+<section class="section arcade-cat" id="play">
+  <div class="container">
+    <div class="arcade-cat-head reveal">
+      <div>
+        <div class="section-label"><span class="num">03</span> Play</div>
+        <h2 class="h2">Take a break.</h2>
+      </div>
+      <p class="arcade-cat-desc">Lighter activities for when you want something less serious between tasks.</p>
+    </div>
+    <ul class="arcade-grid" data-reveal-group>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">◆</span>
+        <h3 class="arcade-tile-card__title">Quick games</h3>
+        <p class="arcade-tile-card__body">Short, casual activities between work.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">✧</span>
+        <h3 class="arcade-tile-card__title">Daily challenges</h3>
+        <p class="arcade-tile-card__body">Small goals to try each day.</p>
+      </li>
+      <li class="arcade-tile-card tilt-card">
+        <span class="arcade-tile-card__mark" aria-hidden="true">✎</span>
+        <h3 class="arcade-tile-card__title">Light puzzles</h3>
+        <p class="arcade-tile-card__body">Something to focus on for a few minutes.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- NOTE -->
 <section class="section">
   <div class="container">
-    <nav class="catnav reveal" id="catnav" aria-label="Arcade categories">
-      <button class="catbtn" data-cat="earn" type="button"><span class="num">01</span>Earn</button>
-      <button class="catbtn" data-cat="learn" type="button"><span class="num">02</span>Learn</button>
-      <button class="catbtn" data-cat="puzzle" type="button"><span class="num">03</span>Puzzle &amp; Brain</button>
-      <button class="catbtn" data-cat="play" type="button"><span class="num">04</span>Play &amp; Classics</button>
-    </nav>
-  </div>
-</section>
-
-<!-- SECTION 01 — EARN -->
-<section class="section" id="cat-earn">
-  <div class="container">
-    <div class="cat-section-head reveal">
-      <div class="section-label"><span class="num">01</span> Earn</div>
-      <h2 class="h2">Apps that pay you.</h2>
-      <span class="cat-section-count">3 apps</span>
+    <div class="note reveal">
+      <h2 class="note-title">A growing space</h2>
+      <p class="note-body">The Arcade is a space to explore what's available inside Funngro. The activities and experiences shown here are illustrative of what the app contains — the exact list changes over time as new work is added.</p>
     </div>
-    <ul class="cat-grid" data-stagger>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">B</span><h3 class="acard-title">Bug Bash</h3><span class="acard-tag">Earn</span></div>
-        <p class="acard-desc">Find bugs in real apps. Get paid per valid report.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Bug Bash">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">Q</span><h3 class="acard-title">Skill Quest</h3><span class="acard-tag">Earn</span></div>
-        <p class="acard-desc">Prove your skill in different subjects. Earn per completed challenge.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Skill Quest">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">L</span><h3 class="acard-title">Learn &amp; Earn</h3><span class="acard-tag">Earn</span></div>
-        <p class="acard-desc">Learn a topic, pass the check, get paid.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play now — Learn and Earn">Play now <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-    </ul>
   </div>
 </section>
 
-<!-- SECTION 02 — LEARN -->
-<section class="section" id="cat-learn">
-  <div class="container">
-    <div class="cat-section-head reveal">
-      <div class="section-label"><span class="num">02</span> Learn</div>
-      <h2 class="h2">Apps that teach.</h2>
-      <span class="cat-section-count">2 apps</span>
-    </div>
-    <ul class="cat-grid" data-stagger>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">F</span><h3 class="acard-title">Financial Literacy</h3><span class="acard-tag">Learn</span></div>
-        <p class="acard-desc">Money basics for young Indians, bite-sized.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Financial Literacy">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">M</span><h3 class="acard-title">Maths Function</h3><span class="acard-tag">Learn</span></div>
-        <p class="acard-desc">Drills for add, subtract, multiply, divide. Timed.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Maths Function">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-    </ul>
-  </div>
-</section>
-
-<!-- SECTION 03 — PUZZLE & BRAIN -->
-<section class="section" id="cat-puzzle">
-  <div class="container">
-    <div class="cat-section-head reveal">
-      <div class="section-label"><span class="num">03</span> Puzzle &amp; Brain</div>
-      <h2 class="h2">Flex your mind.</h2>
-      <span class="cat-section-count">7 apps</span>
-    </div>
-    <ul class="cat-grid" data-stagger>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">S</span><h3 class="acard-title">Sudoku</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">Daily logic grid. Streaks and leaderboards.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play now — Sudoku">Play now <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">C</span><h3 class="acard-title">Crossword</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">India-themed crosswords, updated daily.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Crossword">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">W</span><h3 class="acard-title">Word Cookie Fun</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">Build words from letter tiles.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Word Cookie Fun">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">F</span><h3 class="acard-title">Free Flow</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">Connect coloured dots without crossing lines.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Free Flow">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">2</span><h3 class="acard-title">2048</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">The tile-merging classic, smoother.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — 2048">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">W</span><h3 class="acard-title">Chess</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">Play against the app or friends.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Chess">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">S</span><h3 class="acard-title">Solitaire</h3><span class="acard-tag">Puzzle</span></div>
-        <p class="acard-desc">Klondike + Spider. Quiet classic.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Solitaire">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-    </ul>
-  </div>
-</section>
-
-<!-- SECTION 04 — PLAY & CLASSICS -->
-<section class="section" id="cat-play">
-  <div class="container">
-    <div class="cat-section-head reveal">
-      <div class="section-label"><span class="num">04</span> Play &amp; Classics</div>
-      <h2 class="h2">Pass time.</h2>
-      <span class="cat-section-count">6 apps</span>
-    </div>
-    <ul class="cat-grid" data-stagger>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">W</span><h3 class="acard-title">Water Splash</h3><span class="acard-tag">Play</span></div>
-        <p class="acard-desc">Quick reflex arcade. Tap, dodge, score.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play now — Water Splash">Play now <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">B</span><h3 class="acard-title">Ball Bounce</h3><span class="acard-tag">Play</span></div>
-        <p class="acard-desc">Speed keeps climbing. How long can you last?</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Ball Bounce">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">B</span><h3 class="acard-title">Brick Breaker</h3><span class="acard-tag">Play</span></div>
-        <p class="acard-desc">The classic. Polished for 2026.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Brick Breaker">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">T</span><h3 class="acard-title">Tetris</h3><span class="acard-tag">Play</span></div>
-        <p class="acard-desc">You know the rules. We made it smoother.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Tetris">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">T</span><h3 class="acard-title">Tic Tac Toe</h3><span class="acard-tag">Play</span></div>
-        <p class="acard-desc">Play with friends. Private rooms.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Tic Tac Toe">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-      <li><article class="acard">
-        <div class="acard-head"><span class="acard-tile" aria-hidden="true">L</span><h3 class="acard-title">Ludo</h3><span class="acard-tag">Play</span></div>
-        <p class="acard-desc">Four-player classic. Voice rooms, tournaments.</p>
-        <a class="acard-cta" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener" aria-label="Play Store — Ludo">Play Store <span class="arrow" aria-hidden="true">↗</span></a>
-      </article></li>
-    </ul>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
+<!-- CTA -->
 <section class="section">
   <div class="container">
-    <div class="arcade-cta reveal reveal--scale">
-      <div class="section-label">All in one place</div>
-      <h2 class="arcade-cta-title">Want all twenty? <em>Download Funngro.</em></h2>
-      <p class="arcade-cta-lede">The main earning app is the shortcut to everything.</p>
+    <div class="download-cta reveal">
+      <h2 class="download-cta-title">Open the full Arcade.</h2>
+      <p class="download-cta-lede">Download Funngro to browse everything the Arcade offers.</p>
       <a class="btn btn-primary btn-lg" href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">Download Funngro <span class="arrow down" aria-hidden="true">↓</span></a>
-      <p class="arcade-cta-meta">20 apps · available on Google Play</p>
     </div>
   </div>
 </section>
@@ -268,9 +273,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo"><span class="footer-mark" aria-hidden="true">✌</span><span>Funngro</span></div>
-        <p class="footer-blurb">India's youth, India's brands. Get paid in INR for real brand work — from where you are.</p>
+        <p class="footer-blurb">Explore opportunities from brands and businesses, build experience and find work that fits your skills.</p>
       </div>
-
       <div class="footer-col">
         <h3 class="footer-col-title">Pages</h3>
         <ul>
@@ -278,23 +282,25 @@
           <li><a href="./arcade.html">Arcade</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
-        <h3 class="footer-col-title">Arcade Categories</h3>
+        <h3 class="footer-col-title">Arcade</h3>
         <ul>
-          <li><a href="#cat-earn">Earn</a></li>
-          <li><a href="#cat-learn">Learn</a></li>
-          <li><a href="#cat-puzzle">Puzzle &amp; Brain</a></li>
-          <li><a href="#cat-play">Play &amp; Classics</a></li>
+          <li><a href="#earn">Earn</a></li>
+          <li><a href="#learn">Learn</a></li>
+          <li><a href="#play">Play</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-col-title">Get the app</h3>
+        <ul>
+          <li><a href="https://play.google.com/store/apps/details?id=com.funngro" target="_blank" rel="noopener">Google Play</a></li>
         </ul>
       </div>
     </div>
-
     <div class="footer-bar">
-      <span>© 2026 FUNNGRO</span>
+      <span>© 2026 Funngro</span>
       <span>·</span>
-      <span>MADE IN INDIA</span>
-      <span style="margin-left:auto"><strong>4.2</strong> PLAY STORE · <strong>70 LAKH+</strong> YOUNG INDIANS · <strong>SHARK TANK INDIA S2</strong></span>
+      <span>Made in India</span>
     </div>
   </div>
 </footer>
